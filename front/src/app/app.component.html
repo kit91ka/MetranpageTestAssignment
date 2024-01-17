@@ -1,17 +1,15 @@
-<h1>Список проектов</h1>
-
-<div *ngFor="let project of projects" class="project">
-  Проект - id: {{project.project.id}}
-  <button (click)="buildProject(project.project.id)">Собрать</button>
-  <!-- TODO add template select -->
-
-  <div *ngIf="project.buildedProject">
-    Собранный проект: {{project.buildedProject}}
+<ng-container>
+  <ng-container *ngIf="loader.count > 0;">
+    <div class="loader-parent">
+      <span class="loader"></span>
+    </div>
+  </ng-container>
+  <div class="app-container">
+    <h1>Список проектов</h1>
+    <div *ngFor="let project of projects;" class="project">
+      <app-project-form [project]="project" [templates]="templates"></app-project-form>
+    </div>
   </div>
-
-  <div *ngIf="project.error">
-    Ошибка: {{project.error}}
-  </div>
-</div>
+</ng-container>
 
 <router-outlet></router-outlet>

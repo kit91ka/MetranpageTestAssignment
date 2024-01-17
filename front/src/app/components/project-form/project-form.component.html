@@ -1,0 +1,20 @@
+<div class="app-project-form">
+  <form [formGroup]="form" (submit)="submit()" *ngIf="form">
+    Проект - id: {{project.id}}
+    <select id="template" formControlName="template" [ngClass]="{'error': form.get('template')?.invalid && form.touched}">
+      <option *ngFor="let template of templates" [value]="template.id">
+        {{template.arg1}} {{template.arg2}}
+      </option>
+    </select>
+    <button type="submit">Собрать</button>
+  </form>
+
+  <div *ngIf="buildedProject">
+    Собранный проект: {{buildedProject}}
+  </div>
+
+  <div *ngIf="error">
+    Ошибка: {{error}}
+  </div>
+
+</div>

@@ -12,6 +12,10 @@ export type ProjectResponse = {
   projects: Project[];
 };
 
+export type TemplateResponse = {
+  templates: Template[];
+};
+
 export type BuildResponse = {
   buildedProject: string;
-}
+};

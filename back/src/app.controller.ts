@@ -3,7 +3,7 @@ import { AppService } from "./app.service";
 
 type BuildRequest = {
   id: number;
-  // TODO templateId
+  templateId: number;
 }
 
 @Controller()
@@ -22,6 +22,6 @@ export class AppController {
 
   @Post("build")
   buildProject(@Body() request: BuildRequest) {
-    return this.appService.buildProject(request.id);
+    return this.appService.buildProject(request.id, request.templateId);
   }
 }

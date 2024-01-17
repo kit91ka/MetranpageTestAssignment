@@ -34,9 +34,15 @@ export class AppService {
     };
   }
 
-  async buildProject(id: number) {
+  async buildProject(id: number, templateId: number) {
     // TODO actually, there should be queue scheduling, at actual project RabbitMQ is used
-    const response = await this.makeRequest(`${this.workerUrl}/build`, { id });
+    const template = this.templatesRepository.getList().find(template => template.id === templateId);
+    if (!template) {
+      throw new Error("Invalid templateId");
+    }
+    // I could just add here this Template args: arg1 = arg1-1, arg2 = arg1-2 after the answer but it seems
+    // a bad idea to me so I made this in AppController.cs
+    const response = await this.makeRequest(`${this.workerUrl}/build`, { id, template });
 
     if (response) {
       const processedData = response.buildedProject!;
